@@ -15,7 +15,7 @@ public class Event {
         this.id = pID;
     }
 
-    public Event(String pDescription, Integer pDate) {
+    public Event(String pDescription, Long pDate) {
         this.description = pDescription;
         this.date = pDate;
     }
