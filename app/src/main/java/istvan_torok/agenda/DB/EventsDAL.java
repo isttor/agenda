@@ -54,6 +54,11 @@ public class EventsDAL {
     }
 
     public List<Event> readAll() {
+        return readAll(null);
+    }
+
+
+    public List<Event> readAll(String pFilter) {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -85,6 +90,9 @@ public class EventsDAL {
             final String lDescription = cursor.getString(
                     cursor.getColumnIndexOrThrow(DbMapper.Event.COLUMN_NAME_EVENT_DESCRIPTION)
             );
+            if (pFilter != null && lDescription.toUpperCase().contains(pFilter.toUpperCase()) == false) {
+                continue;
+            }
             final long lDate = cursor.getLong(
                     cursor.getColumnIndexOrThrow(DbMapper.Event.COLUMN_NAME_EVENT_DATETIME)
             );

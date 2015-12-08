@@ -8,13 +8,32 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="istvan_torok.agenda.ListActivity"
     tools:showIn="@layout/activity_list">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search:"
+        android:id="@+id/lblSearch" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/lblSearch"
+        android:layout_alignParentStart="true"
+        android:id="@+id/txtSearch"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"/>
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/eventList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:layout_below="@+id/txtSearch"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
