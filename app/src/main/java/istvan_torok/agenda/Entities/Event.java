@@ -20,6 +20,12 @@ public class Event {
         this.date = pDate;
     }
 
+    public Event(long pID, String pDescription, Long pDate) {
+        this(pID);
+        this.description = pDescription;
+        this.date = pDate;
+    }
+
     public Event(Event pEvent){
         this(pEvent.id);
         this.description = pEvent.description;

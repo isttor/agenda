@@ -2,8 +2,12 @@ package istvan_torok.agenda.DB;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import istvan_torok.agenda.Entities.Event;
 
@@ -47,6 +51,54 @@ public class EventsDAL {
                 DbMapper.Event._ID + " = ?",
                 new String[]{id.toString()}
         );
+    }
+
+    public List<Event> readAll() {
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                DbMapper.Event._ID,
+                DbMapper.Event.COLUMN_NAME_EVENT_DESCRIPTION,
+                DbMapper.Event.COLUMN_NAME_EVENT_DATETIME,
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                DbMapper.Event.COLUMN_NAME_EVENT_DATETIME + " DESC";
+
+        Cursor cursor = db.query(
+                DbMapper.Event.TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                "",                                       // The columns for the WHERE clause
+                new String[] {},                          // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+
+        final List<Event> result = new ArrayList<>();
+
+        while(cursor.moveToNext()) {
+            final String lDescription = cursor.getString(
+                    cursor.getColumnIndexOrThrow(DbMapper.Event.COLUMN_NAME_EVENT_DESCRIPTION)
+            );
+            final long lDate = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(DbMapper.Event.COLUMN_NAME_EVENT_DATETIME)
+            );
+            final long lID = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(DbMapper.Event._ID)
+            );
+
+            final Event lEvent = new Event(lID, lDescription, lDate);
+            result.add(lEvent);
+
+            Log.d(TAG, "Read person: " + lEvent);
+        }
+
+        return result;
     }
 
 }

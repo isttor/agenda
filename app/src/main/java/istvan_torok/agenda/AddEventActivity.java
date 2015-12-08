@@ -5,12 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ScrollView;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import Controls.CustomDatePicker;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import istvan_torok.agenda.DB.EventsDAL;
@@ -31,6 +35,8 @@ public class AddEventActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setTitle("Add");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         mDAL = new EventsDAL(this);
     }
 
@@ -57,4 +63,6 @@ public class AddEventActivity extends AppCompatActivity {
         finish();
         return true;
     }
+
+
 }
