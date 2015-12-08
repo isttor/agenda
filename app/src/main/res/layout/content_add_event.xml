@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical">
+    android:scrollbars="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_input_layout"
@@ -14,7 +16,9 @@
             android:inputType="textMultiLine"
             android:ems="10"
             android:hint="Event description"
-            android:id="@+id/txtEventDescription" />
+            android:id="@+id/txtEventDescription"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"/>
 
     </android.support.design.widget.TextInputLayout>
 
